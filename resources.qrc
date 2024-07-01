@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="images">
+    <file>images/logos/kneespa-logo-full.png</file>
+  </qresource>
+</RCC>
