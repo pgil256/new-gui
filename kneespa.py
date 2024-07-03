@@ -1,334 +1,365 @@
 import sys
-from PyQt5.QtWidgets import (
-    QApplication,
-    QWidget,
-    QVBoxLayout,
-    QLabel,
-    QPushButton,
-    QLineEdit,
-    QHBoxLayout,
-    QCheckBox,
-    QStackedWidget,
-    QFrame,
-    QDialog,
-    QComboBox,
-)
-from PyQt5 import uic
+from PyQt5 import QtWidgets, uic
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
-import csv
 
 
-class LoginPage(QWidget):
+class KneeSpaApp(QtWidgets.QMainWindow):
     def __init__(self):
-        super().__init__()
+        super(KneeSpaApp, self).__init__()
         uic.loadUi("kneespa.ui", self)
 
-    def initUI(self):
+        # Initialize table widget
+        self.table_widget = self.findChild(
+            QtWidgets.QTableWidget, "patient_table_widget"
+        )
+        if self.table_widget:
+            self.table_widget.verticalHeader().setVisible(True)
 
-        # Keypad for logging in
-        self.password_input = QLineEdit(self)
-        self.password_input.setEchoMode(QLineEdit.Password)
-        layout.addWidget(self.password_input)
+        # Stacked widget pages
+        self.home_page = 0
+        self.main_page = 1
+        self.help_page = 2
+        self.profile_page = 3
 
-        keypad_layout = QHBoxLayout()
-        self.keypad = []
-        for i in range(1, 10):
-            btn = QPushButton(str(i), self)
-            btn.clicked.connect(self.keypad_input)
-            keypad_layout.addWidget(btn)
-            self.keypad.append(btn)
-
-        clear_button = QPushButton("X", self)
-        clear_button.clicked.connect(self.clear_password)
-        keypad_layout.addWidget(clear_button)
-
-        layout.addLayout(keypad_layout)
-
-        # Login button
-        login_button = QPushButton("Login", self)
-        login_button.clicked.connect(self.login)
-        layout.addWidget(login_button)
-
-        self.setLayout(layout)
-
-    def keypad_input(self):
-        sender = self.sender()
-        self.password_input.setText(self.password_input.text() + "*")
-
-    def clear_password(self):
-        self.password_input.clear()
-
-    def login(self):
-        user_password = 123
-        admin_password = 456
-        if self.password_input.text() == user_password:
-            main_window.stackedWidget.setCurrentIndex(1)
-        elif self.password_input.text() == admin_password:
-            main_window.stackedWidget.setCurrentIndex(1)
-        else:
-            self.password_input.setText("")
-
-
-class MainPage(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-
-    def initUI(self):
-        layout = QVBoxLayout()
-
-        # Title
-        title = QLabel("Preconfigured Protocols", self)
-        layout.addWidget(title)
-
-        # Protocol display area
-        self.protocol_image = QLabel(self)
-        self.image_index = 1
-        self.update_image()
-        layout.addWidget(self.protocol_image)
-
-        # Navigation buttons
-        nav_layout = QHBoxLayout()
-        self.left_button = QPushButton("<", self)
-        self.left_button.clicked.connect(self.prev_image)
-        nav_layout.addWidget(self.left_button)
-
-        self.right_button = QPushButton(">", self)
-        self.right_button.clicked.connect(self.next_image)
-        nav_layout.addWidget(self.right_button)
-
-        layout.addLayout(nav_layout)
-
-        # Enter Treatment Plan button
-        enter_treatment_button = QPushButton("Enter Treatment Plan", self)
-        enter_treatment_button.clicked.connect(self.enter_treatment_plan)
-        layout.addWidget(enter_treatment_button)
-
-        # Use Custom Preset button
-        use_custom_preset_button = QPushButton("Use Custom Preset", self)
-        use_custom_preset_button.clicked.connect(self.use_custom_preset)
-        layout.addWidget(use_custom_preset_button)
-
-        # Start button
-        start_button = QPushButton("Start", self)
-        layout.addWidget(start_button)
-
-        # Show Pressure checkbox
-        self.show_pressure_checkbox = QCheckBox("Show Pressure", self)
-        layout.addWidget(self.show_pressure_checkbox)
-
-        # Timer
-        self.timer_label = QLabel("Time Remaining: ", self)
-        layout.addWidget(self.timer_label)
-
-        # Back button
-        back_button = QPushButton("Back", self)
-        back_button.clicked.connect(self.back)
-        layout.addWidget(back_button)
-
-        # Mov button
-        mov_button = QPushButton("Mov", self)
-        mov_button.clicked.connect(self.show_mov)
-        layout.addWidget(mov_button)
-
-        # Help button
-        help_button = QPushButton("Help", self)
-        help_button.clicked.connect(self.show_help)
-        layout.addWidget(help_button)
-
-        self.setLayout(layout)
-
-    def update_image(self):
-        self.protocol_image.setPixmap(
-            QPixmap(f"images/protocol-graphics/{self.image_index}.png")
+        # Buttons
+        self.protocols_button = self.findChild(
+            QtWidgets.QPushButton, "protocols_button"
+        )
+        self.help_button = self.findChild(QtWidgets.QPushButton, "help_button")
+        self.login_button = self.findChild(QtWidgets.QPushButton, "login_button")
+        self.start_button = self.findChild(QtWidgets.QPushButton, "push_button_start")
+        self.enter_patient_button = self.findChild(
+            QtWidgets.QPushButton, "enter_patient_pin_button"
         )
 
-    def prev_image(self):
-        if self.image_index > 1:
-            self.image_index -= 1
-            self.update_image()
+        # Labels acting as buttons
+        self.profile_button = self.findChild(QtWidgets.QLabel, "profile_button")
+        self.video_player_button = self.findChild(
+            QtWidgets.QLabel, "video_player_button"
+        )
+        self.brand_label = self.findChild(QtWidgets.QLabel, "top_nav_brand_label")
+        self.brand_logo = self.findChild(QtWidgets.QLabel, "top_nav_logo")
 
-    def next_image(self):
-        if self.image_index < 18:
-            self.image_index += 1
-            self.update_image()
+        # User information labels
+        self.username_nav = self.findChild(QtWidgets.QLabel, "username_nav")
+        self.username_profile = self.findChild(QtWidgets.QLabel, "username_field")
+        self.email_profile = self.findChild(QtWidgets.QLabel, "email_field")
+        self.status_profile = self.findChild(QtWidgets.QLabel, "status_field")
 
-    def enter_treatment_plan(self):
-        dialog = TreatmentPlanDialog(self)
-        dialog.exec_()
+        # Protocol image controls
+        self.label_protocol_image = self.findChild(
+            QtWidgets.QLabel, "label_protocol_image"
+        )
+        self.protocol_image_number = self.findChild(
+            QtWidgets.QLineEdit, "protocol_number_field"
+        )
+        self.forward_button_protocol_image = self.findChild(
+            QtWidgets.QLabel, "forward_button_protocol_image"
+        )
+        self.backward_button_protocol_image = self.findChild(
+            QtWidgets.QLabel, "backward_button_protocol_image"
+        )
 
-    def use_custom_preset(self):
-        dialog = CustomPresetDialog(self)
-        dialog.exec_()
+        # Initialize protocol image
+        self.current_image_number = 1
+        self.update_protocol_image()
 
-    def back(self):
-        self.parent().setCurrentIndex(0)
+        # Connect protocol image navigation buttons
+        self.forward_button_protocol_image.mousePressEvent = (
+            self.show_next_protocol_image
+        )
+        self.backward_button_protocol_image.mousePressEvent = (
+            self.show_previous_protocol_image
+        )
 
-    def show_mov(self):
-        dialog = MovDialog(self)
-        dialog.exec_()
+        # Pressure field controls
+        self.pressure_field = self.findChild(QtWidgets.QLineEdit, "pressure_field")
+        self.plus_label_pressure = self.findChild(
+            QtWidgets.QLabel, "plus_label_pressure"
+        )
+        self.minus_label_pressure = self.findChild(
+            QtWidgets.QLabel, "minus_label_pressure"
+        )
 
-    def show_help(self):
-        dialog = HelpDialog(self)
-        dialog.exec_()
+        # Initialize pressure field
+        self.current_pressure = 40
+        self.update_pressure_field()
 
+        # Connect pressure field navigation buttons
+        self.plus_label_pressure.mousePressEvent = self.increase_pressure
+        self.minus_label_pressure.mousePressEvent = self.decrease_pressure
 
-class TreatmentPlanDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.initUI()
+        # Leg length field controls
+        self.leg_length_field = self.findChild(QtWidgets.QLineEdit, "leg_length_field")
+        self.plus_label_leg_length = self.findChild(
+            QtWidgets.QLabel, "plus_label_leg_length"
+        )
+        self.minus_label_leg_length = self.findChild(
+            QtWidgets.QLabel, "minus_label_leg_length"
+        )
 
-    def initUI(self):
-        layout = QVBoxLayout()
+        # Initialize leg length field
+        self.current_leg_length = 6.0
+        self.update_leg_length_field()
 
-        self.patient_id_input = QLineEdit(self)
-        layout.addWidget(self.patient_id_input)
+        # Connect leg length field navigation buttons
+        self.plus_label_leg_length.mousePressEvent = self.increase_leg_length
+        self.minus_label_leg_length.mousePressEvent = self.decrease_leg_length
 
-        self.patient_data_fields = {}
-        for field in [
-            "Patient Name",
-            "Treatment Start Date",
-            "Treatment Frequency",
-            "Protocol Number",
-            "Number of Cycles",
-            "Pressure",
-            "Use Pulse",
+        # Connect buttons to functions if they are found
+        if self.protocols_button:
+            self.protocols_button.clicked.connect(self.show_main_page)
+        else:
+            print("Error: 'protocols_button' not found")
+
+        if self.help_button:
+            self.help_button.clicked.connect(self.show_help_page)
+        else:
+            print("Error: 'help_button' not found")
+
+        if self.login_button:
+            self.login_button.clicked.connect(self.show_login_dialog)
+        else:
+            print("Error: 'login_button' not found")
+
+        if self.start_button:
+            self.start_button.clicked.connect(self.start_or_stop_protocol)
+        else:
+            print("Error: 'start_button' not found")
+
+        if self.enter_patient_button:
+            self.enter_patient_button.clicked.connect(self.show_enter_patient_dialog)
+        else:
+            print("Error: 'enter_patient_pin_button' not found")
+
+        if self.profile_button:
+            self.profile_button.mousePressEvent = self.show_profile_page
+        else:
+            print("Error: 'profile_button' not found")
+
+        if self.video_player_button:
+            self.video_player_button.mousePressEvent = self.show_video_player_dialog
+        else:
+            print("Error: 'video_player_button' not found")
+
+        if self.brand_label:
+            self.brand_label.mousePressEvent = self.return_to_home_page
+        else:
+            print("Error: 'brand_label' not found")
+
+        if self.brand_logo:
+            self.brand_logo.mousePressEvent = self.return_to_home_page
+        else:
+            print("Error: 'brand_logo' not found")
+
+        # Check and print any QLabel stylesheets issues
+        for label_name in [
+            "label_15",
+            "label_16",
+            "label_17",
+            "label_18",
+            "label_19",
+            "label_20",
         ]:
-            h_layout = QHBoxLayout()
-            label = QLabel(field, self)
-            h_layout.addWidget(label)
-            if field == "Use Pulse":
-                input_widget = QComboBox(self)
-                input_widget.addItems(["true", "false"])
+            label = self.findChild(QtWidgets.QLabel, label_name)
+            if label is not None:
+                if not label.styleSheet():
+                    print(
+                        f"Could not parse stylesheet of object QLabel(name = '{label_name}')"
+                    )
             else:
-                input_widget = QLineEdit(self)
-            self.patient_data_fields[field] = input_widget
-            h_layout.addWidget(input_widget)
-            layout.addLayout(h_layout)
+                print(f"QLabel '{label_name}' not found")
 
-        button_layout = QHBoxLayout()
-        clear_button = QPushButton("Clear", self)
-        clear_button.clicked.connect(self.clear_fields)
-        button_layout.addWidget(clear_button)
-
-        edit_button = QPushButton("Edit", self)
-        edit_button.clicked.connect(self.edit_fields)
-        button_layout.addWidget(edit_button)
-
-        layout.addLayout(button_layout)
-
-        self.setLayout(layout)
-
-    def clear_fields(self):
-        for field in self.patient_data_fields.values():
-            if isinstance(field, QLineEdit):
-                field.clear()
-            elif isinstance(field, QComboBox):
-                field.setCurrentIndex(0)
-
-    def edit_fields(self):
-        if self.parent().parent().parent().password_input.text() == "456":
-            for field in self.patient_data_fields.values():
-                field.setEnabled(True)
-        else:
-            for field in self.patient_data_fields.values():
-                field.setEnabled(False)
-
-
-class CustomPresetDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.initUI()
-
-    def initUI(self):
-        layout = QVBoxLayout()
-
-        fields = ["Protocol Number", "Number of Cycles", "Pressure", "Use Pulse"]
-        self.custom_fields = {}
-        for field in fields:
-            h_layout = QHBoxLayout()
-            label = QLabel(field, self)
-            h_layout.addWidget(label)
-            if field == "Use Pulse":
-                input_widget = QComboBox(self)
-                input_widget.addItems(["true", "false"])
-            else:
-                input_widget = QLineEdit(self)
-            self.custom_fields[field] = input_widget
-            h_layout.addWidget(input_widget)
-            layout.addLayout(h_layout)
-
-        button_layout = QHBoxLayout()
-        clear_button = QPushButton("Clear", self)
-        clear_button.clicked.connect(self.clear_fields)
-        button_layout.addWidget(clear_button)
-
-        enter_button = QPushButton("Enter", self)
-        button_layout.addWidget(enter_button)
-
-        layout.addLayout(button_layout)
-
-        self.setLayout(layout)
-
-    def clear_fields(self):
-        for field in self.custom_fields.values():
-            if isinstance(field, QLineEdit):
-                field.clear()
-            elif isinstance(field, QComboBox):
-                field.setCurrentIndex(0)
-
-
-class MovDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.initUI()
-
-    def initUI(self):
-        layout = QVBoxLayout()
-        self.setWindowTitle("YouTube Player")
-
-        iframe = QLabel(self)
-        iframe.setText(
-            '<iframe width="560" height="315" src="https://www.youtube.com/embed/UIyvAmPFn8g?si=RbX3jltrUwZ1aFJi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+        # Set the initial page to home_page
+        self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
+            self.home_page
         )
-        layout.addWidget(iframe)
 
-        self.setLayout(layout)
+        # Initialize the login dialog
+        self.login_dialog = None
+        self.init_login_dialog()
 
+    def update_protocol_image(self):
+        image_path = (
+            f"images/graphics/protocol-graphics/{self.current_image_number}.png"
+        )
+        self.label_protocol_image.setPixmap(QPixmap(image_path))
+        self.protocol_image_number.setText(str(self.current_image_number))
 
-class HelpDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.initUI()
+    def show_next_protocol_image(self, event):
+        if self.current_image_number < 18:
+            self.current_image_number += 1
+            self.update_protocol_image()
 
-    def initUI(self):
-        layout = QVBoxLayout()
+    def show_previous_protocol_image(self, event):
+        if self.current_image_number > 1:
+            self.current_image_number -= 1
+            self.update_protocol_image()
 
-        help_text = QLabel("Instructions on how to use the current page...", self)
-        layout.addWidget(help_text)
+    def update_pressure_field(self):
+        self.pressure_field.setText(f"{self.current_pressure} lbs")
 
-        close_button = QPushButton("X", self)
-        close_button.clicked.connect(self.close)
-        layout.addWidget(close_button)
+    def increase_pressure(self, event):
+        if self.current_pressure < 100:
+            self.current_pressure += 5
+            self.update_pressure_field()
 
-        self.setLayout(layout)
+    def decrease_pressure(self, event):
+        if self.current_pressure > 0:
+            self.current_pressure -= 5
+            self.update_pressure_field()
 
+    def update_leg_length_field(self):
+        self.leg_length_field.setText(f"{self.current_leg_length:.1f} in")
 
-class MainWindow(QStackedWidget):
-    def __init__(self):
-        super().__init__()
+    def increase_leg_length(self, event):
+        if self.current_leg_length < 18:
+            self.current_leg_length += 0.5
+            self.update_leg_length_field()
 
-        self.login_page = LoginPage()
-        self.main_page = MainPage()
+    def decrease_leg_length(self, event):
+        if self.current_leg_length > 0:
+            self.current_leg_length -= 0.5
+            self.update_leg_length_field()
 
-        self.addWidget(self.login_page)
-        self.addWidget(self.main_page)
+    def start_or_stop_protocol(self):
+        if self.start_button.text() == "Start":
+            self.start_button.setText("Stop")
+            self.start_button.setStyleSheet(
+                "background-color: rgb(200, 0, 0);"
+                "color: white;"
+                "border: none;"
+                "text-decoration: none;"
+                "margin: 0px 15px;"
+                "font-size: 20px;"
+                "font-weight: bold;"
+                "border-radius: 8px;"
+            )
+        else:
+            self.start_button.setText("Start")
+            self.start_button.setStyleSheet(
+                "background-color: rgb(0, 200, 0);"
+                "color: white;"
+                "border: none;"
+                "text-decoration: none;"
+                "margin: 0px 15px;"
+                "font-size: 20px;"
+                "font-weight: bold;"
+                "border-radius: 8px;"
+            )
 
-        self.setCurrentIndex(1)
+    def show_login_dialog(self):
+        self.login_dialog.exec_()
+
+    def init_login_dialog(self):
+        self.login_dialog = QtWidgets.QDialog(self)
+        uic.loadUi("login.ui", self.login_dialog)
+        self.login_dialog.adjustSize
+
+        self.login_line_edit = self.login_dialog.findChild(
+            QtWidgets.QLineEdit, "password_line_edit"
+        )
+        self.login_help_button = self.login_dialog.findChild(
+            QtWidgets.QPushButton, "login_help_button"
+        )
+        self.login_enter_button = self.login_dialog.findChild(
+            QtWidgets.QPushButton, "enter_password_button"
+        )
+        self.login_clear_button = self.login_dialog.findChild(
+            QtWidgets.QPushButton, "clear_password_button"
+        )
+
+        self.login_help_button.clicked.connect(self.show_help_dialog)
+        self.login_enter_button.clicked.connect(self.handle_login)
+        self.login_clear_button.clicked.connect(self.clear_line_edit)
+
+        for i in range(10):
+            button = self.login_dialog.findChild(
+                QtWidgets.QPushButton, f"pushButton_{i}"
+            )
+            if button:
+                button.clicked.connect(lambda _, x=str(i): self.append_star(x))
+
+    def append_star(self, value):
+        self.login_line_edit.setText(self.login_line_edit.text() + "*")
+
+    def clear_line_edit(self):
+        self.login_line_edit.clear()
+
+    def show_help_dialog(self):
+        help_dialog = QtWidgets.QDialog(self)
+        uic.loadUi("login-help.ui", help_dialog)
+        help_dialog.exec_()
+
+    def handle_login(self):
+        if self.login_line_edit.text() == "***":  # Assuming '123' was entered as '***'
+            self.login_line_edit.clear()
+            self.username_nav.setText("user.lastname")
+            self.username_profile.setText("user.lastname")
+            self.email_profile.setText("user.lastname@outlook.com")
+            self.status_profile.setText("Admin")
+            self.login_button.setText("Logout")
+            self.login_button.clicked.disconnect()
+            self.login_button.clicked.connect(self.handle_logout)
+            self.login_dialog.accept()
+
+    def handle_logout(self):
+        self.username_nav.setText("")
+        self.username_profile.setText("")
+        self.email_profile.setText("")
+        self.status_profile.setText("")
+        self.login_button.setText("Login")
+        self.login_button.clicked.disconnect()
+        self.login_button.clicked.connect(self.show_login_dialog)
+
+        # Reset the page to home_page
+        self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
+            self.home_page
+        )
+
+    def show_home_page(self):
+        self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
+            self.home_page
+        )
+
+    def return_to_home_page(self, event):
+        self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
+            self.home_page
+        )
+
+    def show_main_page(self):
+        self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
+            self.main_page
+        )
+        if self.findChild(QtWidgets.QTabWidget, "DRx_tabs"):
+            self.findChild(QtWidgets.QTabWidget, "DRx_tabs").setCurrentIndex(0)
+
+    def show_help_page(self):
+        self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
+            self.help_page
+        )
+
+    def show_profile_page(self, event):
+        self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
+            self.profile_page
+        )
+
+    def show_enter_patient_dialog(self):
+        enter_patient_dialog = QtWidgets.QDialog(self)
+        uic.loadUi("enter-patient.ui", enter_patient_dialog)
+        enter_patient_dialog.adjustSize()
+        enter_patient_dialog.exec_()
+
+    def show_video_player_dialog(self, event):
+        video_player_dialog = QtWidgets.QDialog(self)
+        uic.loadUi("video-player.ui", video_player_dialog)
+        video_player_dialog.adjustSize()
+        video_player_dialog.exec_()
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    main_window = MainWindow()
-    main_window.show()
+    app = QtWidgets.QApplication(sys.argv)
+    window = KneeSpaApp()
+    window.show()
     sys.exit(app.exec_())
