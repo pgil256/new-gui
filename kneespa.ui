@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>450</height>
+    <width>1366</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="maximumSize">
    <size>
-    <width>800</width>
-    <height>450</height>
+    <width>1366</width>
+    <height>768</height>
    </size>
   </property>
   <widget class="QGroupBox" name="central_widget">
@@ -27,12 +27,12 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>450</height>
+     <width>1366</width>
+     <height>768</height>
     </rect>
    </property>
    <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
@@ -55,9 +55,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>60</y>
-      <width>800</width>
-      <height>390</height>
+      <y>120</y>
+      <width>1366</width>
+      <height>648</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -66,16 +66,28 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="maximumSize">
+     <size>
+      <width>1366</width>
+      <height>648</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
     <property name="title">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
     <widget class="QFrame" name="frame">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>80</width>
-       <height>390</height>
+       <width>120</width>
+       <height>648</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -83,6 +95,12 @@
        <horstretch>1</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1366</width>
+       <height>648</height>
+      </size>
      </property>
      <property name="styleSheet">
       <string notr="true"> background-color: rgb(30, 30, 30);
@@ -117,13 +135,25 @@
       </property>
       <item>
        <widget class="QPushButton" name="login_button">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>120</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>120</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true"> background-color: rgb(30, 30, 30);
                                         color: white;
                                         border: none;
                                         text-align: center;
                                         text-decoration: none;
-                                        font-size: 14px;
+                                        font-size: 22px;
                                         font-weight:bold;
                                         margin: 4px 2px;
                                         border-radius: 12px;</string>
@@ -135,13 +165,25 @@
       </item>
       <item>
        <widget class="QPushButton" name="protocols_button">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>120</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>120</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true"> background-color: rgb(30, 30, 30);
                                         color: white;
                                         border: none;
                                         text-align: center;
                                         text-decoration: none;
-                                        font-size: 14px;
+                                        font-size: 22px;
                                         font-weight:bold;
                                         margin: 4px 2px;
                                         border-radius: 12px;</string>
@@ -153,14 +195,27 @@
       </item>
       <item>
        <widget class="QPushButton" name="help_button">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>120</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>120</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true"> background-color: rgb(30, 30, 30);
                                         color: white;
                                         border: none;
                                         text-align: center;
                                         text-decoration: none;
-                                        font-size: 14px;
+                                        font-size: 22px;
                                         font-weight:bold;
+                                        margin: 4px 2px;
                                         border-radius: 12px;</string>
         </property>
         <property name="text">
@@ -172,16 +227,15 @@
        <widget class="QLabel" name="video_player_button">
         <property name="maximumSize">
          <size>
-          <width>50</width>
-          <height>50</height>
+          <width>90</width>
+          <height>90</height>
          </size>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:white;
                                         border: 1px solid red;
-                                        border-radius: 25px;
-                                        align-items:center;
-                                        padding:8px;</string>
+                                        border-radius: 45px;
+                                        padding:14px;</string>
         </property>
         <property name="text">
          <string/>
@@ -205,28 +259,40 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>120</x>
        <y>0</y>
-       <width>720</width>
-       <height>400</height>
+       <width>1246</width>
+       <height>648</height>
       </rect>
      </property>
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="maximumSize">
       <size>
-       <width>720</width>
-       <height>400</height>
+       <width>1246</width>
+       <height>648</height>
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page_home">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1246</width>
+        <height>648</height>
+       </size>
+      </property>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
@@ -245,18 +311,55 @@
        </property>
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1246</width>
+           <height>840</height>
+          </size>
+         </property>
          <property name="styleSheet">
-          <string notr="true">border:none;</string>
+          <string notr="true">border:none;
+padding:20px;</string>
          </property>
          <property name="title">
           <string/>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
           <property name="bottomMargin">
-           <number>9</number>
+           <number>0</number>
           </property>
           <item>
            <widget class="QLabel" name="label_8">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>1100</width>
+              <height>600</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1100</width>
+              <height>600</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -274,26 +377,47 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_main">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1246</width>
+        <height>648</height>
+       </size>
+      </property>
       <widget class="QTabWidget" name="DRx_tabs">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>720</width>
-         <height>349</height>
+         <width>1246</width>
+         <height>528</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="maximumSize">
         <size>
-         <width>720</width>
-         <height>390</height>
+         <width>1246</width>
+         <height>548</height>
         </size>
        </property>
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:white;</string>
+        <string notr="true"> background-color: white;
+                                    border: none;
+                                    font-size: 22px;
+                                </string>
        </property>
        <property name="tabPosition">
         <enum>QTabWidget::North</enum>
@@ -302,7 +426,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -326,16 +450,40 @@
         <bool>false</bool>
        </property>
        <widget class="QWidget" name="preset_protocols_tab">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1246</width>
+          <height>528</height>
+         </size>
+        </property>
         <attribute name="title">
          <string>Preset Protocol</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QFrame" name="frame_3">
            <property name="maximumSize">
             <size>
-             <width>720</width>
-             <height>300</height>
+             <width>1246</width>
+             <height>428</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -365,15 +513,34 @@
             </property>
             <item>
              <widget class="QGroupBox" name="groupBox_3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>79</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>1246</width>
+                <height>129</height>
+               </size>
+              </property>
               <property name="styleSheet">
-               <string notr="true"/>
+               <string notr="true">padding:0 10px;
+margin-top:10px;</string>
               </property>
               <property name="title">
                <string/>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <property name="spacing">
-                <number>5</number>
+                <number>15</number>
                </property>
                <property name="leftMargin">
                 <number>0</number>
@@ -404,13 +571,13 @@
                 <widget class="QLabel" name="label_5">
                  <property name="maximumSize">
                   <size>
-                   <width>200</width>
-                   <height>16777215</height>
+                   <width>400</width>
+                   <height>120</height>
                   </size>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">
-                                                                            font-size: 20px;
+                                                                            font-size: 32px;
                                                                             font-weight: bold;
                                                                             margin: 5px 0px;</string>
                  </property>
@@ -426,14 +593,14 @@
                 <widget class="QLabel" name="backward_button_protocol_image">
                  <property name="minimumSize">
                   <size>
-                   <width>25</width>
-                   <height>25</height>
+                   <width>60</width>
+                   <height>60</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>35</width>
-                   <height>35</height>
+                   <width>60</width>
+                   <height>60</height>
                   </size>
                  </property>
                  <property name="styleSheet">
@@ -470,24 +637,24 @@
                 <widget class="QLineEdit" name="protocol_number_field">
                  <property name="minimumSize">
                   <size>
-                   <width>78</width>
+                   <width>70</width>
                    <height>40</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
                    <width>70</width>
-                   <height>40</height>
+                   <height>70</height>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">
+                  <string notr="true">font-size:22px;
                                                                             background-color: white;
                                                                             border: 1px solid
                                                                             #bdc3c7;
                                                                             border-radius: 4px;
-                                                                            padding: 4px 8px;
-                                                                            font-size: 14px;
+                                                                            padding: 4px 4px;
+                                                               
                                                                             color: #34495e;
                                                                             min-width: 60px;</string>
                  </property>
@@ -503,14 +670,14 @@
                 <widget class="QLabel" name="forward_button_protocol_image">
                  <property name="minimumSize">
                   <size>
-                   <width>30</width>
-                   <height>30</height>
+                   <width>60</width>
+                   <height>60</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>35</width>
-                   <height>35</height>
+                   <width>60</width>
+                   <height>60</height>
                   </size>
                  </property>
                  <property name="styleSheet">
@@ -558,10 +725,28 @@
             </item>
             <item>
              <widget class="QGroupBox" name="groupBox_14">
+              <property name="minimumSize">
+               <size>
+                <width>1246</width>
+                <height>350</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>1246</width>
+                <height>400</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">padding:15px 15px;</string>
+              </property>
               <property name="title">
                <string/>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <property name="spacing">
+                <number>0</number>
+               </property>
                <property name="leftMargin">
                 <number>0</number>
                </property>
@@ -572,27 +757,33 @@
                 <number>0</number>
                </property>
                <property name="bottomMargin">
-                <number>0</number>
+                <number>15</number>
                </property>
                <item>
                 <widget class="QLabel" name="label_protocol_image">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>400</width>
+                   <height>225</height>
+                  </size>
+                 </property>
                  <property name="maximumSize">
                   <size>
-                   <width>720</width>
-                   <height>200</height>
+                   <width>1000</width>
+                   <height>300</height>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">border:
-                                                                            2px solid rgb(0, 170,
-                                                                            255);
+                  <string notr="true">border:2px
+                                                                            solid rgb(0, 170, 255);
                                                                             border-radius:5px;
+                                                                            padding:0px;
                                                                             margin:5px;</string>
                  </property>
                  <property name="pixmap">
@@ -613,17 +804,32 @@
           </widget>
          </item>
          <item>
-          <widget class="QWidget" name="widget" native="true">
+          <widget class="QGroupBox" name="groupBox_15">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>65</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
-             <width>720</width>
-             <height>60</height>
+             <width>1246</width>
+             <height>100</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">margin: 6px 0px;</string>
+            <string notr="true">border:none;</string>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_nav">
+           <property name="title">
+            <string/>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
             <property name="spacing">
              <number>10</number>
             </property>
@@ -637,353 +843,376 @@
              <number>0</number>
             </property>
             <property name="bottomMargin">
-             <number>0</number>
+             <number>10</number>
             </property>
             <item>
-             <widget class="QGroupBox" name="groupBox_15">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_12">
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>65</height>
+                <height>40</height>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border:none;</string>
+               <string notr="true">
+                                                                font-size: 24px;
+                                                                font-weight: bold;
+                                                            </string>
               </property>
-              <property name="title">
+              <property name="text">
+               <string>Max Pressure:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="plus_label_pressure">
+              <property name="minimumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
+                                                                border-bottom: 1px solid
+                                                                #bdc3c7; padding: 2px;
+                                                                background-color:
+                                                                #ecf0f1;
+                                                                border: 1px solid
+                                                                #bdc3c7;
+                                                                border-radius: 4px;</string>
+              </property>
+              <property name="text">
                <string/>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_12">
-               <property name="spacing">
-                <number>4</number>
-               </property>
-               <property name="leftMargin">
-                <number>5</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>5</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QLabel" name="label_12">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            font-size: 14px;
-                                                                            font-weight: bold;
-                                                                        </string>
-                 </property>
-                 <property name="text">
-                  <string>Max Pressure:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="plus_label_pressure">
-                 <property name="minimumSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>40</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            border-bottom: 1px solid
-                                                                            #bdc3c7; padding: 2px;
-                                                                            background-color:
-                                                                            #ecf0f1;
-                                                                            border: 1px solid
-                                                                            #bdc3c7;
-                                                                            border-radius: 4px;</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="pixmap">
-                  <pixmap>images/buttons/plus.png</pixmap>
-                 </property>
-                 <property name="scaledContents">
-                  <bool>true</bool>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="pressure_field">
-                 <property name="minimumSize">
-                  <size>
-                   <width>78</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            background-color: white;
-                                                                            border: 1px solid
-                                                                            #bdc3c7;
-                                                                            border-radius: 4px;
-                                                                            padding: 4px 8px;
-                                                                            font-size: 14px;
-                                                                            color: #34495e;
-                                                                            min-width: 60px;</string>
-                 </property>
-                 <property name="text">
-                  <string>1</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="minus_label_pressure">
-                 <property name="minimumSize">
-                  <size>
-                   <width>30</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>40</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            border-bottom: 1px solid
-                                                                            #bdc3c7; padding: 2px;
-                                                                            background-color:
-                                                                            #ecf0f1;
-                                                                            border: 1px solid
-                                                                            #bdc3c7;
-                                                                            border-radius: 4px;</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="pixmap">
-                  <pixmap>images/buttons/minus.png</pixmap>
-                 </property>
-                 <property name="scaledContents">
-                  <bool>true</bool>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_13">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            font-size: 14px;
-                                                                            font-weight: bold;
-                                                                        </string>
-                 </property>
-                 <property name="text">
-                  <string>Leg Length:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="plus_label_leg_length">
-                 <property name="minimumSize">
-                  <size>
-                   <width>30</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>40</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            border-bottom: 1px solid
-                                                                            #bdc3c7; padding: 2px;
-                                                                            background-color:
-                                                                            #ecf0f1;
-                                                                            border: 1px solid
-                                                                            #bdc3c7;
-                                                                            border-radius: 4px;</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="pixmap">
-                  <pixmap>images/buttons/plus.png</pixmap>
-                 </property>
-                 <property name="scaledContents">
-                  <bool>true</bool>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="leg_length_field">
-                 <property name="minimumSize">
-                  <size>
-                   <width>78</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            background-color: white;
-                                                                            border: 1px solid
-                                                                            #bdc3c7;
-                                                                            border-radius: 4px;
-                                                                            padding: 4px 8px;
-                                                                            font-size: 14px;
-                                                                            color: #34495e;
-                                                                            min-width: 60px;</string>
-                 </property>
-                 <property name="text">
-                  <string>1</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="minus_label_leg_length">
-                 <property name="minimumSize">
-                  <size>
-                   <width>30</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>40</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            border-bottom: 1px solid
-                                                                            #bdc3c7; padding: 2px;
-                                                                            background-color:
-                                                                            #ecf0f1;
-                                                                            border: 1px solid
-                                                                            #bdc3c7;
-                                                                            border-radius: 4px;</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="pixmap">
-                  <pixmap>images/buttons/minus.png</pixmap>
-                 </property>
-                 <property name="scaledContents">
-                  <bool>true</bool>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBox_showPressure_2">
-                 <property name="maximumSize">
-                  <size>
-                   <width>150</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-                                                                            font-size: 14px;
-                                                                            font-weight: bold;
-                                                                        </string>
-                 </property>
-                 <property name="text">
-                  <string>Use Pulse</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <property name="pixmap">
+               <pixmap>images/buttons/plus.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
              </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="pressure_field">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font-size:22px;
+                                                                            background-color: white;
+                                                                            border: 1px solid
+                                                                            #bdc3c7;
+                                                                            border-radius: 4px;
+                                                                            padding: 4px 4px;
+                                                               
+                                                                            color: #34495e;
+                                                                            min-width: 60px;</string>
+              </property>
+              <property name="text">
+               <string>1</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="minus_label_pressure">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
+                                                                border-bottom: 1px solid
+                                                                #bdc3c7; padding: 2px;
+                                                                background-color:
+                                                                #ecf0f1;
+                                                                border: 1px solid
+                                                                #bdc3c7;
+                                                                border-radius: 4px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap>images/buttons/minus.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
+                                                                font-size: 24px;
+                                                                font-weight: bold;
+                                                            </string>
+              </property>
+              <property name="text">
+               <string>Leg Length:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="plus_label_leg_length">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
+                                                                border-bottom: 1px solid
+                                                                #bdc3c7; padding: 2px;
+                                                                background-color:
+                                                                #ecf0f1;
+                                                                border: 1px solid
+                                                                #bdc3c7;
+                                                                border-radius: 4px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap>images/buttons/plus.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leg_length_field">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font-size:22px;
+                                                                            background-color: white;
+                                                                            border: 1px solid
+                                                                            #bdc3c7;
+                                                                            border-radius: 4px;
+                                                                            padding: 4px 4px;
+                                                               
+                                                                            color: #34495e;
+                                                                            min-width: 60px;</string>
+              </property>
+              <property name="text">
+               <string>1</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="minus_label_leg_length">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
+                                                                border-bottom: 1px solid
+                                                                #bdc3c7; padding: 2px;
+                                                                background-color:
+                                                                #ecf0f1;
+                                                                border: 1px solid
+                                                                #bdc3c7;
+                                                                border-radius: 4px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap>images/buttons/minus.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_showPressure_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>175</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
+
+    QCheckBox {
+        spacing: 10px;
+        font-size: 24px;
+font-weight:bold;
+    }
+
+    QCheckBox::indicator {
+        width: 24px;
+        height: 24px;
+    }
+</string>
+              </property>
+              <property name="text">
+               <string>Use Pulse</string>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="tristate">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -991,6 +1220,18 @@
         </layout>
        </widget>
        <widget class="QWidget" name="patient_treatment_plans_tab">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1246</width>
+          <height>528</height>
+         </size>
+        </property>
         <attribute name="title">
          <string>Patient Treatment Plans</string>
         </attribute>
@@ -999,26 +1240,26 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>720</width>
-           <height>320</height>
+           <width>1246</width>
+           <height>528</height>
           </rect>
          </property>
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>560</width>
-           <height>250</height>
+           <width>1160</width>
+           <height>528</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>720</width>
-           <height>340</height>
+           <width>1246</width>
+           <height>528</height>
           </size>
          </property>
          <property name="title">
@@ -1026,34 +1267,37 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <property name="spacing">
-           <number>12</number>
+           <number>0</number>
           </property>
           <property name="leftMargin">
-           <number>12</number>
+           <number>0</number>
           </property>
           <property name="topMargin">
-           <number>12</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
-           <number>12</number>
+           <number>0</number>
           </property>
           <property name="bottomMargin">
-           <number>12</number>
+           <number>0</number>
           </property>
           <item>
            <widget class="QTableWidget" name="patient_table_widget">
             <property name="maximumSize">
              <size>
-              <width>720</width>
-              <height>320</height>
+              <width>800</width>
+              <height>475</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">
                                                         QTableWidget {
                                                         background-color: #ffffff;
+
+padding: 10px 30px 0px 30px;
                                                         alternate-background-color: #f7f7f7;
-                                                        padding: 5px;
+                                                    
+
                                                         border-radius: 4px;
                                                         gridline-color: #e0e0e0;
                                                         }
@@ -1071,20 +1315,15 @@
                                                         QHeaderView::section {
                                                         background-color:rgb(85, 170, 255);
                                                         color:white;
-                                                        padding:8px;
-                                                        width:200px;
+                                                        padding:10px;
+                                                        width:300px;
                                                         border: 1px solid #e0e0e0;
                                                         font-weight: bold;
 
                                                         }
 
 
-                                                        QTableCornerButton::section {
-                                                        background-color:rgb(85, 170, 255); /* Green
-                                                        background for top-left corner */
-                                                        border: 1px solid #dddddd; /* Light grey
-                                                        border for top-left corner */
-                                                        }</string>
+</string>
             </property>
             <property name="autoScrollMargin">
              <number>16</number>
@@ -1114,10 +1353,13 @@
              <bool>false</bool>
             </attribute>
             <attribute name="horizontalHeaderCascadingSectionResizes">
-             <bool>false</bool>
+             <bool>true</bool>
             </attribute>
             <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>100</number>
+             <number>0</number>
+            </attribute>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>0</number>
             </attribute>
             <attribute name="horizontalHeaderHighlightSections">
              <bool>false</bool>
@@ -1132,12 +1374,21 @@
              <bool>false</bool>
             </attribute>
             <attribute name="verticalHeaderCascadingSectionResizes">
-             <bool>true</bool>
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderMinimumSectionSize">
+             <number>50</number>
             </attribute>
             <attribute name="verticalHeaderDefaultSectionSize">
-             <number>30</number>
+             <number>50</number>
+            </attribute>
+            <attribute name="verticalHeaderHighlightSections">
+             <bool>false</bool>
             </attribute>
             <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderStretchLastSection">
              <bool>false</bool>
             </attribute>
             <row>
@@ -1207,8 +1458,8 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
-              <height>230</height>
+              <width>300</width>
+              <height>450</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -1219,14 +1470,26 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <property name="spacing">
-              <number>50</number>
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item>
               <widget class="QPushButton" name="enter_patient_pin_button">
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>100</height>
+                 <width>270</width>
+                 <height>75</height>
                 </size>
                </property>
                <property name="styleSheet">
@@ -1234,7 +1497,8 @@
                                                                     background-color: #3498db;
                                                                     color: white;
                                                                     border: none;
-                                                                    font-size: 14px;
+                                                                    margin:10px;
+                                                                    font-size: 22px;
                                                                     padding: 10px 20px;
                                                                     border-radius: 4px;
                                                                     font-weight: bold;</string>
@@ -1248,8 +1512,8 @@
               <widget class="QPushButton" name="edit_patient_button">
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>100</height>
+                 <width>270</width>
+                 <height>75</height>
                 </size>
                </property>
                <property name="styleSheet">
@@ -1257,8 +1521,9 @@
                                                                     background-color: rgb(125, 125,
                                                                     125);
                                                                     color: white;
+                                                                    margin:10px;
                                                                     border: none;
-                                                                    font-size: 14px;
+                                                                    font-size: 22px;
                                                                     padding: 10px 20px;
                                                                     border-radius: 4px;
                                                                     font-weight: bold;</string>
@@ -1270,18 +1535,25 @@
              </item>
              <item>
               <widget class="QPushButton" name="clear_patient_button">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>100</height>
+                 <width>270</width>
+                 <height>75</height>
                 </size>
                </property>
                <property name="styleSheet">
                 <string notr="true">
-                                                                    background-color: rgb(0, 0, 0);
+                                                                    background-color: black;
                                                                     color: white;
+                                                                    margin:10px;
                                                                     border: none;
-                                                                    font-size: 14px;
+                                                                    font-size: 22px;
                                                                     padding: 10px 20px;
                                                                     border-radius: 4px;
                                                                     font-weight: bold;</string>
@@ -1298,17 +1570,17 @@
         </widget>
        </widget>
       </widget>
-      <widget class="QGroupBox" name="groupBox_6">
+      <widget class="QGroupBox" name="start_group_box">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>340</y>
-         <width>720</width>
-         <height>50</height>
+         <y>528</y>
+         <width>1246</width>
+         <height>120</height>
         </rect>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -1319,15 +1591,25 @@
          <height>0</height>
         </size>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>1246</width>
+         <height>120</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
        <property name="styleSheet">
-        <string notr="true">border:none;</string>
+        <string notr="true">border:none;
+padding:5px;</string>
        </property>
        <property name="title">
         <string/>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <property name="spacing">
-         <number>20</number>
+         <number>50</number>
         </property>
         <property name="leftMargin">
          <number>0</number>
@@ -1341,26 +1623,80 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item>
+         <spacer name="horizontalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item alignment="Qt::AlignHCenter">
          <widget class="QCheckBox" name="checkbox_timer">
           <property name="maximumSize">
            <size>
-            <width>150</width>
-            <height>16777215</height>
+            <width>250</width>
+            <height>120</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+
+    QCheckBox {
+        spacing: 10px;
+        font-size: 22px;
+    }
+
+    QCheckBox::indicator {
+        width: 22px;
+        height: 22px;
+    }
+</string>
           </property>
           <property name="text">
            <string>Show Timer</string>
           </property>
          </widget>
         </item>
-        <item alignment="Qt::AlignHCenter">
+        <item>
+         <spacer name="horizontalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QCheckBox" name="checkBox_showPressure">
           <property name="maximumSize">
            <size>
-            <width>150</width>
-            <height>16777215</height>
+            <width>200</width>
+            <height>120</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+
+    QCheckBox {
+        spacing: 10px;
+        font-size: 22px;
+    }
+
+    QCheckBox::indicator {
+        width: 22px;
+        height: 22px;
+    }
+</string>
           </property>
           <property name="text">
            <string>Show Pressure</string>
@@ -1368,52 +1704,78 @@
          </widget>
         </item>
         <item>
+         <spacer name="horizontalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QPushButton" name="push_button_start">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>200</width>
-            <height>40</height>
+            <width>350</width>
+            <height>70</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>300</width>
-            <height>40</height>
+            <width>375</width>
+            <height>70</height>
            </size>
           </property>
           <property name="styleSheet">
            <string notr="true"> background-color: rgb(0, 200, 0);
                                                 color: white;
                                                 border: none;
-                                                text-decoration: none;
-                                                margin: 0px 15px;
-                                                font-size: 20px;
+                                                text-decoration:bold;
+
+                                                font-size: 32px;
                                                 font-weight:bold;
-                                                border-radius: 8px;</string>
+                                                border-radius: 12px;</string>
           </property>
           <property name="text">
            <string>Start</string>
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_15">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="label_3">
           <property name="minimumSize">
            <size>
-            <width>40</width>
-            <height>30</height>
+            <width>100</width>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>60</width>
-            <height>40</height>
+            <width>120</width>
+            <height>80</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1433,29 +1795,60 @@
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_14">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="help_page">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1246</width>
+        <height>840</height>
+       </size>
+      </property>
       <widget class="QGroupBox" name="groupBox_11">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>720</width>
-         <height>400</height>
+         <width>1246</width>
+         <height>648</height>
         </rect>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>1246</width>
+         <height>600</height>
+        </size>
+       </property>
        <property name="maximumSize">
         <size>
-         <width>720</width>
-         <height>400</height>
+         <width>1246</width>
+         <height>648</height>
         </size>
        </property>
        <property name="title">
@@ -1466,20 +1859,26 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>720</width>
-          <height>390</height>
+          <width>1246</width>
+          <height>648</height>
          </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>720</width>
-          <height>390</height>
+          <width>1160</width>
+          <height>600</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>720</width>
-          <height>390</height>
+          <width>1246</width>
+          <height>648</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -1511,19 +1910,31 @@
          </property>
          <item>
           <widget class="QLabel" name="label_14">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>50</height>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>1246</width>
+             <height>100</height>
             </size>
            </property>
            <property name="styleSheet">
             <string notr="true">border:none;
                                                     subcontrol-origin: margin;
-                                                    subcontrol padding: 0 5px;
+                                                    padding: 0 10px;
                                                     color: #3498db;
                                                     font-weight: bold;
-                                                    font-size:24px;</string>
+                                                    font-size:32px;</string>
            </property>
            <property name="text">
             <string>Help</string>
@@ -1535,58 +1946,114 @@
          </item>
          <item>
           <widget class="QPlainTextEdit" name="plainTextEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>300</height>
+             <width>1160</width>
+             <height>500</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>1160</width>
+             <height>550</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true"> border: none;
-font-size:15px;
-                                                    padding: 5px 10px;
-                                                    color: #333333;</string>
+            <string notr="true">border: none;
+                                                    font-size: 22px;
+                                                    padding: 30px 30px;
+                                                    color: black;
+                                                    background-color: white;
+                                                    line-height: 2;
+                                                    letter-spacing: 0.5px;
+                                                    border-left: 4px solid #3498db;
+                                                    margin-left: 20px;
+                                                </string>
+           </property>
+           <property name="lineWrapMode">
+            <enum>QPlainTextEdit::WidgetWidth</enum>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
            </property>
            <property name="plainText">
             <string>This interface is designed to control the KneeSpa DRx physical therapy device.
+
 To begin, enter your user PIN in the login screen.
 
-Once you are logged, you have the ability toutilize the preconfigured Kneespa protocol as well as prescribed treatment plans.
+Once you are logged, you have the ability to utilize the preconfigured Kneespa protocol as well as prescribed treatment plans.
 
-Using the preconfigured protocol tabs, you are able to configure traction pressure, reposition the leg attachment by adjusting the leg length parameter, and implement end-range pulsation. 
+Using the preconfigured protocol tabs, you are able to configure traction pressure, reposition the leg attachment by adjusting the leg length parameter, and implement end-range pulsation.
 
 Within the treatment plan tab, you may enter a patient's PIN to access and utilize their prescribed treatment plan. If you are their provider, you can adjust their treatment options
-when logged in with your PIN. 
+when logged in with your PIN.
 
 If you would like to reset your PIN for any reason, or if your patient's treatment plan is not editable, you may click the profile button in the top right corner to notify an administrator of the issue.</string>
            </property>
+           <property name="tabStopWidth">
+            <number>200</number>
+           </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>
       </widget>
      </widget>
      <widget class="QWidget" name="profile_page">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1246</width>
+        <height>648</height>
+       </size>
+      </property>
       <widget class="QGroupBox" name="groupBox">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-10</y>
-         <width>720</width>
-         <height>400</height>
+         <y>0</y>
+         <width>1246</width>
+         <height>648</height>
         </rect>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="maximumSize">
         <size>
-         <width>720</width>
-         <height>400</height>
+         <width>1246</width>
+         <height>648</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;</string>
        </property>
        <property name="title">
         <string/>
@@ -1594,10 +2061,10 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
        <widget class="QGroupBox" name="groupBox_4">
         <property name="geometry">
          <rect>
-          <x>80</x>
-          <y>30</y>
-          <width>550</width>
-          <height>330</height>
+          <x>170</x>
+          <y>50</y>
+          <width>900</width>
+          <height>550</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -1608,14 +2075,14 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
         </property>
         <property name="minimumSize">
          <size>
-          <width>550</width>
-          <height>330</height>
+          <width>900</width>
+          <height>500</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>340</width>
-          <height>650</height>
+          <width>900</width>
+          <height>600</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -1649,7 +2116,7 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
                <string notr="true">border: none;
                                                                 padding: 0 5px;
                                                                 color: black;
-                                                                font-size: 20px;
+                                                                font-size: 28px;
                                                                 font-weight:bold;</string>
               </property>
               <property name="text">
@@ -1676,7 +2143,8 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
              <widget class="QLabel" name="username_label">
               <property name="styleSheet">
                <string notr="true"> font-weight: bold;
-                                                                color: #2c3e50;</string>
+                                                                color: #2c3e50;
+                                                                font-size:20px;</string>
               </property>
               <property name="text">
                <string>username:</string>
@@ -1708,6 +2176,11 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
              <widget class="QLabel" name="email_label">
+              <property name="styleSheet">
+               <string notr="true"> font-weight: bold;
+                                                                color: #2c3e50;
+                                                                font-size:20px;</string>
+              </property>
               <property name="text">
                <string>email:</string>
               </property>
@@ -1734,6 +2207,11 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
            <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
              <widget class="QLabel" name="status_label">
+              <property name="styleSheet">
+               <string notr="true"> font-weight: bold;
+                                                                color: #2c3e50;
+                                                                font-size:20px;</string>
+              </property>
               <property name="text">
                <string>status:</string>
               </property>
@@ -1765,17 +2243,30 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
              <widget class="QPushButton" name="pushButton">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>250</width>
                 <height>50</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>150</width>
-                <height>50</height>
+                <width>300</width>
+                <height>80</height>
                </size>
               </property>
               <property name="styleSheet">
@@ -1783,36 +2274,49 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
                                                                 #3498db;
                                                                 color: white;
                                                                 border: none;
-                                                                font-size: 14px;
-                                                                padding: 3px 12px;
+                                                                font-size: 22px;
+                                                                padding: 3px 9px;
                                                                 border-radius: 4px;
                                                                 font-weight: bold;</string>
               </property>
               <property name="text">
-               <string>Reset PIN</string>
+               <string>Request PIN Reset</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item>
              <widget class="QPushButton" name="pushButton_2">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>300</width>
                 <height>50</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>200</width>
-                <height>50</height>
+                <width>350</width>
+                <height>80</height>
                </size>
               </property>
               <property name="styleSheet">
                <string notr="true"> background-color:
-                                                                #3498db;
+                                                              rgb(75, 75, 75);
                                                                 color: white;
                                                                 border: none;
-                                                                font-size: 14px;
+                                                                font-size: 22px;
                                                                 padding: 12px 15px;
                                                                 border-radius: 4px;
                                                                 font-weight: bold;</string>
@@ -1821,6 +2325,19 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
                <string>Request Status Change</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_10">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -1836,14 +2353,20 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>800</width>
-      <height>60</height>
+      <width>1366</width>
+      <height>120</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="maximumSize">
      <size>
-      <width>16777215</width>
-      <height>100</height>
+      <width>1366</width>
+      <height>120</height>
      </size>
     </property>
     <property name="styleSheet">
@@ -1876,8 +2399,8 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
       <widget class="QLabel" name="top_nav_logo">
        <property name="maximumSize">
         <size>
-         <width>80</width>
-         <height>60</height>
+         <width>120</width>
+         <height>90</height>
         </size>
        </property>
        <property name="styleSheet">
@@ -1888,7 +2411,7 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
                                     text-decoration: none;
                                     font-size: 14px;
                                     font-weight:bold;
-                                    margin: 10px 10px 0px 10px;
+                                    margin: 10px 5px 0px 15px;
 
                                 </string>
        </property>
@@ -1911,12 +2434,18 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
      </item>
      <item>
       <widget class="QLabel" name="top_nav_brand_label">
+       <property name="maximumSize">
+        <size>
+         <width>360</width>
+         <height>100</height>
+        </size>
+       </property>
        <property name="styleSheet">
-        <string notr="true"> font-size: 20px;
+        <string notr="true"> font-size: 40px;
                                     font-weight: bold;
                                     color: white;
                                     background-color: rgb(30, 30, 30);
-                                    margin: 4px 15px;</string>
+                                    margin: 8px 30px;</string>
        </property>
        <property name="text">
         <string>KneeSpa DRx</string>
@@ -1938,10 +2467,22 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
      </item>
      <item>
       <widget class="QLabel" name="username_nav">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
-         <width>140</width>
+         <width>280</width>
          <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>280</width>
+         <height>100</height>
         </size>
        </property>
        <property name="styleSheet">
@@ -1950,13 +2491,13 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
                                     border: none;
                                     text-align: center;
                                     text-decoration: none;
-                                    font-size: 14px;
+                                    font-size: 20px;
                                     font-weight:bold;
                                     margin: 4px 30px;
                                     border-radius: 12px;</string>
        </property>
        <property name="text">
-        <string>         </string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -1977,17 +2518,16 @@ If you would like to reset your PIN for any reason, or if your patient's treatme
       <widget class="QLabel" name="profile_button">
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>40</height>
+         <width>135</width>
+         <height>80</height>
         </size>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color:white;
                                     border: 1px solid black;
-                                    margin: 0px 30px;
-                                    border-radius: 20px;
-                                    align-items:center;
-                                    padding:5px;</string>
+                                    margin: 0px 30px 0px 20px;
+                                    border-radius:40px;
+                                    padding:12px;</string>
        </property>
        <property name="text">
         <string/>

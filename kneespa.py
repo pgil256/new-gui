@@ -1,13 +1,126 @@
 import sys
-from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import Qt
+import csv
+import os
+from PyQt5 import QtWidgets, QtCore, uic
+from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+from PyQt5.QtMultimediaWidgets import QVideoWidget
+from PyQt5.QtWidgets import (
+    QApplication,
+    QWidget,
+    QMainWindow,
+    QDesktopWidget,
+    QMessageBox,
+    QDialog,
+    QVBoxLayout
+)
+
+
+class VideoPlayerDialog(QDialog):
+    def __init__(self, parent=None):
+        super(VideoPlayerDialog, self).__init__(parent)
+        uic.loadUi("video-player.ui", self)
+
+        # Create QVideoWidget and add it to the video_container
+        self.video_player_widget = QVideoWidget()
+        video_container = self.findChild(QWidget, "video_container")
+        layout = QVBoxLayout(video_container)
+        layout.addWidget(self.video_player_widget)
+        video_container.setLayout(layout)
+
+        self.play_button = self.findChild(QtWidgets.QPushButton, "play_button")
+        self.pause_button = self.findChild(QtWidgets.QPushButton, "pause_button")
+        self.seekSlider = self.findChild(QtWidgets.QSlider, "seekSlider")
+
+        self.forward_button_video = self.findChild(
+            QtWidgets.QLabel, "forward_button_video"
+        )
+        self.backward_button_video = self.findChild(
+            QtWidgets.QLabel, "backward_button_video"
+        )
+
+        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        self.mediaPlayer.setVideoOutput(self.video_player_widget)
+
+        self.play_button.clicked.connect(self.play_video)
+        self.pause_button.clicked.connect(self.pause_video)
+        self.seekSlider.sliderMoved.connect(self.set_position)
+
+        self.mediaPlayer.positionChanged.connect(self.position_changed)
+        self.mediaPlayer.durationChanged.connect(self.duration_changed)
+
+        self.mediaPlayer.error.connect(self.handle_error)
+
+        # Connect video navigation buttons
+        self.forward_button_video.mousePressEvent = self.show_next_video
+        self.backward_button_video.mousePressEvent = self.show_previous_video
+
+        # Initialize video list and current video index
+        self.video_list = ["1.mp4", "2.mp4"]
+        self.current_video_index = 0
+
+    def play_video(self):
+        if self.mediaPlayer.state() != QMediaPlayer.PlayingState:
+            self.mediaPlayer.play()
+
+    def pause_video(self):
+        if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
+            self.mediaPlayer.pause()
+
+    def set_position(self, position):
+        self.mediaPlayer.setPosition(position)
+
+    def position_changed(self, position):
+        self.seekSlider.setValue(position)
+
+    def duration_changed(self, duration):
+        self.seekSlider.setRange(0, duration)
+
+    def set_media(self, file_path):
+        if os.path.exists(file_path):
+            if os.access(file_path, os.R_OK):
+                self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(file_path)))
+            else:
+                QMessageBox.critical(
+                    self, "Error", f"Permission denied: Cannot read {file_path}"
+                )
+        else:
+            QMessageBox.critical(self, "Error", f"Video file not found: {file_path}")
+
+    def handle_error(self):
+        error_msg = self.mediaPlayer.errorString()
+        QMessageBox.critical(self, "Media Error", f"Error: {error_msg}")
+
+    def show_next_video(self, event):
+        self.current_video_index = (self.current_video_index + 1) % len(self.video_list)
+        self.load_current_video()
+
+    def show_previous_video(self, event):
+        self.current_video_index = (self.current_video_index - 1) % len(self.video_list)
+        self.load_current_video()
+
+    def load_current_video(self):
+        video_path = os.path.abspath(
+            f"videos/{self.video_list[self.current_video_index]}"
+        )
+        self.set_media(video_path)
+        self.play_video()
 
 
 class KneeSpaApp(QtWidgets.QMainWindow):
     def __init__(self):
         super(KneeSpaApp, self).__init__()
-        uic.loadUi("kneespa.ui", self)
+        try:
+            uic.loadUi("kneespa.ui", self)
+        except FileNotFoundError:
+            QMessageBox.critical(self, "Error", "UI file 'kneespa.ui' not found.")
+            sys.exit(1)
+
+        self.setWindowFlags(Qt.FramelessWindowHint)
+
+        self.login_pin = ""
+        self.patient_pin = ""
 
         # Initialize table widget
         self.table_widget = self.findChild(
@@ -15,6 +128,11 @@ class KneeSpaApp(QtWidgets.QMainWindow):
         )
         if self.table_widget:
             self.table_widget.verticalHeader().setVisible(True)
+
+        # Initialize user and patient data
+        self.users = self.load_csv("users/user_pins.csv")
+        self.patients = self.load_csv("patients/patient_pins.csv")
+        self.current_user = None
 
         # Stacked widget pages
         self.home_page = 0
@@ -133,6 +251,10 @@ class KneeSpaApp(QtWidgets.QMainWindow):
         else:
             print("Error: 'enter_patient_pin_button' not found")
 
+        # Connect edit and clear patient data buttons
+        self.edit_patient_button.clicked.connect(self.edit_patient_data)
+        self.clear_patient_button.clicked.connect(self.clear_patient_data)
+
         if self.profile_button:
             self.profile_button.mousePressEvent = self.show_profile_page
         else:
@@ -153,32 +275,17 @@ class KneeSpaApp(QtWidgets.QMainWindow):
         else:
             print("Error: 'brand_logo' not found")
 
-        # Check and print any QLabel stylesheets issues
-        for label_name in [
-            "label_15",
-            "label_16",
-            "label_17",
-            "label_18",
-            "label_19",
-            "label_20",
-        ]:
-            label = self.findChild(QtWidgets.QLabel, label_name)
-            if label is not None:
-                if not label.styleSheet():
-                    print(
-                        f"Could not parse stylesheet of object QLabel(name = '{label_name}')"
-                    )
-            else:
-                print(f"QLabel '{label_name}' not found")
-
         # Set the initial page to home_page
         self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
             self.home_page
         )
 
-        # Initialize the login dialog
+        # Initialize the dialogs
         self.login_dialog = None
         self.init_login_dialog()
+        self.enter_patient_dialog = None
+        self.init_enter_patient_dialog()
+        self.video_player_dialog = None
 
     def update_protocol_image(self):
         image_path = (
@@ -230,11 +337,11 @@ class KneeSpaApp(QtWidgets.QMainWindow):
                 "background-color: rgb(200, 0, 0);"
                 "color: white;"
                 "border: none;"
-                "text-decoration: none;"
+                "text-decoration: bold;"
                 "margin: 0px 15px;"
-                "font-size: 20px;"
+                "font-size: 32px;"
                 "font-weight: bold;"
-                "border-radius: 8px;"
+                "border-radius: 12px;"
             )
         else:
             self.start_button.setText("Start")
@@ -242,23 +349,70 @@ class KneeSpaApp(QtWidgets.QMainWindow):
                 "background-color: rgb(0, 200, 0);"
                 "color: white;"
                 "border: none;"
-                "text-decoration: none;"
+                "text-decoration: bold;"
                 "margin: 0px 15px;"
-                "font-size: 20px;"
+                "font-size: 32px;"
                 "font-weight: bold;"
-                "border-radius: 8px;"
+                "border-radius: 12px;"
+            )
+
+    def load_csv(self, filename):
+        data = {}
+        try:
+            with open(filename, "r") as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    data[row["pin"]] = row
+        except FileNotFoundError:
+            QMessageBox.critical(self, "Error", f"CSV file not found: {filename}")
+        except csv.Error as e:
+            QMessageBox.critical(self, "Error", f"CSV file error in {filename}: {e}")
+        return data
+
+    def save_patient_data(self):
+        if self.current_user and self.current_user["status"] == "admin":
+            current_pin = (
+                self.patient_pin
+            )  # Assuming you store the current patient's PIN
+            if current_pin in self.patients:
+                for row in range(self.table_widget.rowCount()):
+                    key = (
+                        self.table_widget.item(row, 0).text().lower().replace(" ", "_")
+                    )
+                    value = self.table_widget.item(row, 1).text()
+                    self.patients[current_pin][key] = value
+
+                # Update CSV file
+                with open("patients_pins.csv", "w", newline="") as file:
+                    writer = csv.DictWriter(
+                        file, fieldnames=self.patients[current_pin].keys()
+                    )
+                    writer.writeheader()
+                    for patient in self.patients.values():
+                        writer.writerow(patient)
+
+                QMessageBox.information(
+                    self, "Success", "Patient data updated successfully."
+                )
+            else:
+                QMessageBox.warning(self, "Error", "No patient data to save.")
+        else:
+            QMessageBox.warning(
+                self, "Access Denied", "Only admins can save patient data."
             )
 
     def show_login_dialog(self):
+        self.login_pin = ""
+        self.login_line_edit.clear()
         self.login_dialog.exec_()
 
     def init_login_dialog(self):
         self.login_dialog = QtWidgets.QDialog(self)
         uic.loadUi("login.ui", self.login_dialog)
-        self.login_dialog.adjustSize
+        self.login_dialog.adjustSize()
 
         self.login_line_edit = self.login_dialog.findChild(
-            QtWidgets.QLineEdit, "password_line_edit"
+            QtWidgets.QLineEdit, "login_line_edit"
         )
         self.login_help_button = self.login_dialog.findChild(
             QtWidgets.QPushButton, "login_help_button"
@@ -266,43 +420,61 @@ class KneeSpaApp(QtWidgets.QMainWindow):
         self.login_enter_button = self.login_dialog.findChild(
             QtWidgets.QPushButton, "enter_password_button"
         )
-        self.login_clear_button = self.login_dialog.findChild(
-            QtWidgets.QPushButton, "clear_password_button"
+        self.clear_login_pin_button = self.login_dialog.findChild(
+            QtWidgets.QPushButton, "clear_login_pin_button"
         )
 
-        self.login_help_button.clicked.connect(self.show_help_dialog)
         self.login_enter_button.clicked.connect(self.handle_login)
-        self.login_clear_button.clicked.connect(self.clear_line_edit)
+        self.login_help_button.clicked.connect(self.show_login_help_dialog)
+        self.clear_login_pin_button.clicked.connect(self.clear_login_line_edit)
 
         for i in range(10):
             button = self.login_dialog.findChild(
                 QtWidgets.QPushButton, f"pushButton_{i}"
             )
             if button:
-                button.clicked.connect(lambda _, x=str(i): self.append_star(x))
+                button.clicked.connect(lambda _, x=str(i): self.append_login_star(x))
 
-    def append_star(self, value):
+    def append_login_star(self, value):
         self.login_line_edit.setText(self.login_line_edit.text() + "*")
+        self.login_pin = self.login_pin + value
 
-    def clear_line_edit(self):
+    def append_patient_star(self, value):
+        self.patient_pin_input.setText(self.patient_pin_input.text() + "*")
+        self.patient_pin += value
+
+    def clear_login_line_edit(self):
         self.login_line_edit.clear()
+        self.login_pin = ""
 
-    def show_help_dialog(self):
+    def show_login_help_dialog(self):
         help_dialog = QtWidgets.QDialog(self)
         uic.loadUi("login-help.ui", help_dialog)
         help_dialog.exec_()
 
+    def show_enter_patient_help_dialog(self):
+        help_dialog = QtWidgets.QDialog(self)
+        uic.loadUi("enter-patient-help.ui", help_dialog)
+        help_dialog.exec_()
+
     def handle_login(self):
-        if self.login_line_edit.text() == "***":  # Assuming '123' was entered as '***'
+        if self.login_pin in self.users:
+            self.current_user = self.users[self.login_pin]
             self.login_line_edit.clear()
-            self.username_nav.setText("user.lastname")
-            self.username_profile.setText("user.lastname")
-            self.email_profile.setText("user.lastname@outlook.com")
-            self.status_profile.setText("Admin")
-            self.login_button.setText("Logout")
-            self.login_button.clicked.disconnect()
-            self.login_button.clicked.connect(self.handle_logout)
+            self.login_pin = ""
+            self.update_ui_after_login()
             self.login_dialog.accept()
+        else:
+            QMessageBox.warning(self, "Login Failed", "Invalid PIN. Please try again.")
+
+    def update_ui_after_login(self):
+        self.username_nav.setText(self.current_user["username"])
+        self.username_profile.setText(self.current_user["username"])
+        self.email_profile.setText(self.current_user["email"])
+        self.status_profile.setText(self.current_user["status"])
+        self.login_button.setText("Logout")
+        self.login_button.clicked.disconnect()
+        self.login_button.clicked.connect(self.handle_logout)
 
     def handle_logout(self):
         self.username_nav.setText("")
@@ -312,11 +484,109 @@ class KneeSpaApp(QtWidgets.QMainWindow):
         self.login_button.setText("Login")
         self.login_button.clicked.disconnect()
         self.login_button.clicked.connect(self.show_login_dialog)
+        self.clear_patient_data()
 
         # Reset the page to home_page
         self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
             self.home_page
         )
+
+    def handle_patient_pin(self):
+        if self.patient_pin in self.patients:
+            self.update_patient_table(self.patients[self.patient_pin])
+            self.enter_patient_dialog.accept()
+        else:
+            QMessageBox.warning(
+                self, "Invalid PIN", "Patient not found. Please try again."
+            )
+        self.patient_pin = ""  # Clear the PIN after handling
+
+    def update_patient_table(self, patient_data):
+        for row, (key, value) in enumerate(patient_data.items()):
+            if key != "pin":
+                self.table_widget.setItem(
+                    row - 1,
+                    0,
+                    QtWidgets.QTableWidgetItem(key.replace("_", " ").title()),
+                )
+                self.table_widget.setItem(row - 1, 1, QtWidgets.QTableWidgetItem(value))
+        QMessageBox.information(self, "Success", "Patient data loaded successfully.")
+
+    def init_enter_patient_dialog(self):
+        self.enter_patient_dialog = QtWidgets.QDialog(self)
+        uic.loadUi("enter-patient.ui", self.enter_patient_dialog)
+        self.enter_patient_dialog.adjustSize()
+
+        self.patient_pin_input = self.enter_patient_dialog.findChild(
+            QtWidgets.QLineEdit, "patient_pin_line_edit"
+        )
+
+        self.enter_patient_help_button = self.enter_patient_dialog.findChild(
+            QtWidgets.QPushButton, "enter_patient_help_button"
+        )
+
+        for i in range(10):
+            button = self.enter_patient_dialog.findChild(
+                QtWidgets.QPushButton, f"pushButton_{i}"
+            )
+            if button:
+                button.clicked.connect(lambda _, x=str(i): self.append_patient_star(x))
+
+        self.clear_patient_pin_button = self.enter_patient_dialog.findChild(
+            QtWidgets.QPushButton, "clear_patient_pin_button"
+        )
+        if self.clear_patient_pin_button:
+            self.clear_patient_pin_button.clicked.connect(self.clear_patient_line_edit)
+
+        self.enter_button = self.enter_patient_dialog.findChild(
+            QtWidgets.QPushButton, "enter_patient_pin_button"
+        )
+        if self.enter_button:
+            self.enter_button.clicked.connect(self.handle_patient_pin)
+
+        self.enter_patient_help_button.clicked.connect(
+            self.show_enter_patient_help_dialog
+        )
+
+    def show_enter_patient_dialog(self):
+        self.patient_pin = ""
+        self.patient_pin_input.clear()
+        self.enter_patient_dialog.exec_()
+
+    def edit_patient_data(self):
+        if not self.current_user:
+            QMessageBox.warning(self, "Access Denied", "Please log in first.")
+            return
+
+        if self.current_user["status"] != "admin":
+            QMessageBox.warning(
+                self, "Access Denied", "Only admins can edit patient data."
+            )
+            return
+
+        # Enable editing for the second column
+        for row in range(self.table_widget.rowCount()):
+            item = self.table_widget.item(row, 1)
+            if item:
+                item.setFlags(item.flags() | Qt.ItemIsEditable)
+
+        # Connect itemChanged signal to save_patient_data method
+        self.table_widget.itemChanged.connect(self.save_patient_data)
+
+        QMessageBox.information(
+            self,
+            "Edit Mode",
+            "You can now edit patient data. Changes will be saved automatically.",
+        )
+
+    def clear_patient_data(self):
+        for row in range(self.table_widget.rowCount()):
+            self.table_widget.setItem(row, 1, QtWidgets.QTableWidgetItem(""))
+        QMessageBox.information(self, "Success", "Patient data cleared successfully.")
+
+    def clear_patient_line_edit(self):
+        self.patient_pin_input.clear()
+        self.patient_pin = ""
 
     def show_home_page(self):
         self.findChild(QtWidgets.QStackedWidget, "stackedWidget").setCurrentIndex(
@@ -345,17 +615,11 @@ class KneeSpaApp(QtWidgets.QMainWindow):
             self.profile_page
         )
 
-    def show_enter_patient_dialog(self):
-        enter_patient_dialog = QtWidgets.QDialog(self)
-        uic.loadUi("enter-patient.ui", enter_patient_dialog)
-        enter_patient_dialog.adjustSize()
-        enter_patient_dialog.exec_()
-
     def show_video_player_dialog(self, event):
-        video_player_dialog = QtWidgets.QDialog(self)
-        uic.loadUi("video-player.ui", video_player_dialog)
-        video_player_dialog.adjustSize()
-        video_player_dialog.exec_()
+        if not self.video_player_dialog:
+            self.video_player_dialog = VideoPlayerDialog(self)
+            self.video_player_dialog.load_current_video()
+        self.video_player_dialog.show()
 
 
 if __name__ == "__main__":
